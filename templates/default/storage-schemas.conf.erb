@@ -1,0 +1,21 @@
+# /etc/graphite/storage-schemas.conf
+
+##################################
+# Rendered by Chef, do not edit! #
+##################################
+
+[carbon]
+pattern = ^carbon\.
+retentions = 60:90d
+
+[gatling]
+pattern = ^gatling\.
+retentions = 1s:90d
+
+[gatling aggregated]
+pattern = ^gatling2\.
+retentions = 10s:90d
+
+[default]
+pattern = .*
+retentions = 15s:90d

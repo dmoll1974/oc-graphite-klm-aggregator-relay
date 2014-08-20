@@ -1,0 +1,24 @@
+---
+driver:
+  name: vagrant
+  customize:
+    memory: 512
+
+provisioner:
+  name: chef_zero
+
+platforms:
+  - name: ubuntu-14.04
+    driver:
+     network:
+     - ["forwarded_port", {guest: 8080, host: 8080}]
+     - ["forwarded_port", {guest: 2003, host: 2003, protocol: 'udp'}]
+     - ["public_network", {bridge: 'en0: Ethernet'}]
+
+suites:
+  - name: default
+    run_list:
+      - recipe[oc-graphite::default]
+      - recipe[oc-graphite::graphite_carbon]
+      - recipe[oc-graphite::graphite_web]
+    attributes:

@@ -1,0 +1,25 @@
+# /etc/graphite/storage-aggregation.conf
+
+##################################
+# Rendered by Chef, do not edit! #
+##################################
+
+[sum]
+pattern = \.count$
+xFilesFactor = 0
+aggregationMethod = sum
+
+[min]
+pattern = \.min$
+xFilesFactor = 0.1
+aggregationMethod = min
+
+[max]
+pattern = \.max$
+xFilesFactor = 0.1
+aggregationMethod = max
+
+[default_average]
+pattern = .*
+xFilesFactor = 0.3
+aggregationMethod = average
