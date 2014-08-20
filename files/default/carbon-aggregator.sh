@@ -12,7 +12,7 @@
 # Author: Jonas Genannt <jonas.genannt@capi2name.de>
 
 PATH=/sbin:/usr/sbin:/bin:/usr/bin
-DESC="Graphite aggregator daemon"
+DESC="Carbon aggregator daemon"
 NAME=carbon-aggregator
 DAEMON=/usr/bin/$NAME
 PIDFILE=/var/run/$NAME.pid

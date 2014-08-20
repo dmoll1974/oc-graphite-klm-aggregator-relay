@@ -18,7 +18,8 @@ LOG_METRIC_ACCESS = True
 # Graphite installs from packages so this isn't configurable for now
 GRAPHITE_ROOT = '/usr/share/graphite-web'
 CONF_DIR = '/etc/graphite'
-STORAGE_DIR = '/var/lib/graphite/whisper'
+#STORAGE_DIR = '/var/lib/graphite/whisper'
+STORAGE_DIR = '<%= node['oc-graphite']['carbon']['data_dir'] %>'
 CONTENT_DIR = '/usr/share/graphite-web/static'
 WHISPER_DIR = '/var/lib/graphite/whisper'
 #RRD_DIR = '/opt/graphite/storage/rrd'
