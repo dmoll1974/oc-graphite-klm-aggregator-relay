@@ -45,9 +45,11 @@ WHISPER_AUTOFLUSH = FALSE
 WHISPER_FALLOCATE_CREATE = True
 
 [relay]
+<% if node['graphite']['carbon']['carbon_relay_enabled'] == true -%>
 ENABLE_UDP_LISTENER = True
 UDP_RECEIVER_INTERFACE = 0.0.0.0
 UDP_RECEIVER_PORT = 2003
+<% end -%>
 
 LINE_RECEIVER_INTERFACE = 0.0.0.0
 LINE_RECEIVER_PORT = 2013
@@ -58,7 +60,10 @@ LOG_LISTENER_CONNECTIONS = True
 
 RELAY_METHOD = aggregated-consistent-hashing
 REPLICATION_FACTOR = 1
-DESTINATIONS = 127.0.0.1:2024
+
+<% if node['graphite']['carbon']['carbon_relay_enabled'] == true -%>
+DESTINATIONS = <%= node['graphite']['carbon']['carbon_relay_destinations'] %>
+<% end -%>
 
 MAX_DATAPOINTS_PER_MESSAGE = 500
 MAX_QUEUE_SIZE = 10000
@@ -66,6 +71,12 @@ MAX_QUEUE_SIZE = 10000
 USE_FLOW_CONTROL = True
 
 [aggregator]
+
+<% if node['graphite']['carbon']['carbon_relay_enabled'] == false -%>
+ENABLE_UDP_LISTENER = True
+UDP_RECEIVER_INTERFACE = 0.0.0.0
+UDP_RECEIVER_PORT = 2003
+<% end -%>
 
 LINE_RECEIVER_INTERFACE = 0.0.0.0
 LINE_RECEIVER_PORT = 2023
@@ -76,6 +87,7 @@ PICKLE_RECEIVER_PORT = 2024
 
 LOG_LISTENER_CONNECTIONS = True
 FORWARD_ALL = True
+
 DESTINATIONS = 127.0.0.1:2004
 
 REPLICATION_FACTOR = 1

@@ -13,12 +13,14 @@ platforms:
      network:
      - ["forwarded_port", {guest: 8080, host: 8080}]
      - ["forwarded_port", {guest: 2003, host: 2003, protocol: 'udp'}]
-     - ["public_network", {bridge: 'en0: Ethernet'}]
+     - ["public_network", {bridge: 'Intel(R) 82579LM Gigabit Network Connection'}]
 
 suites:
   - name: default
     run_list:
+      - recipe[memcached::default]
       - recipe[oc-graphite::default]
       - recipe[oc-graphite::graphite_carbon]
       - recipe[oc-graphite::graphite_web]
+
     attributes:

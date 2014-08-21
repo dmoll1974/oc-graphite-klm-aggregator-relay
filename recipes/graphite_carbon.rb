@@ -56,17 +56,21 @@ cookbook_file '/etc/init.d/carbon-relay' do
 end
 
 
-service 'carbon-cache' do
-  action [:enable, :start]
-  supports :restart => true, :start => true, :stop => true
-end
 
 service 'carbon-aggregator' do
   action [:enable, :start]
   supports :restart => true, :start => true, :stop => true
 end
 
+
 service 'carbon-relay' do
+  action [:enable, :start]
+  supports :restart => true, :start => true, :stop => true
+  only_if { node['graphite']['carbon']['carbon_relay_enabled'] == true }
+end
+
+
+service 'carbon-cache' do
   action [:enable, :start]
   supports :restart => true, :start => true, :stop => true
 end
