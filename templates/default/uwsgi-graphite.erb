@@ -11,3 +11,8 @@ uid = _graphite
 gid = _graphite
 wsgi-file = /usr/share/graphite-web/graphite.wsgi
 http-socket = <%= node['oc-graphite']['uwsgi']['listen_ip'] %>:<%= node['oc-graphite']['uwsgi']['listen_port'] %>
+
+# Add crossdomain acces for GET
+add-header = Access-Control-Allow-Origin: *
+add-header = Access-Control-Allow-Headers: origin, x-requested-with, content-type                                                                 
+add-header = Access-Control-Allow-Methods: GET

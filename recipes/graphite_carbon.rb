@@ -34,6 +34,7 @@ template '/etc/carbon/storage-aggregation.conf' do
   group 'root'
 end
 
+
 cookbook_file '/etc/carbon/aggregation-rules.conf' do
   source 'aggregation-rules.conf'
   mode 0644

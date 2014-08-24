@@ -16,16 +16,16 @@ default['oc-graphite']['web']['server'] = 'uwsgi'
 
 # Carbon-relay
 
-default['graphite']['carbon']['carbon_relay_enabled'] = true
+default['graphite']['carbon']['carbon_relay_enabled'] = false
 # Add Host:PICKLE_RECEIVER_PORT for carbon-aggregator instances you want to relay to (use 127.0.0.1 for localhost)
 default['graphite']['carbon']['carbon_relay_destinations'] = '127.0.0.1:2024,172.26.169.159:2024'
 
 # Clustering
 
 # Add array of cluster web servers (excluding localhost!) e.g.'["172.26.169.159:8080", "172.26.169.159"]'
-default['oc-graphite']['web']['cluster_servers'] = '["172.26.169.159:8080"]'
+default['oc-graphite']['web']['cluster_servers'] = '[]'
 # Add array of memcached hosts (including localhost ip!) e.g.'["172.26.169.159:8080", "172.26.169.159"]'
-default['oc-graphite']['web']['memcached_hosts'] = '["172.26.169.159:11211", "172.26.169.46:11211"]'
+default['oc-graphite']['web']['memcached_hosts'] = '["127.0.0.1:11211"]'
 
 
 # This does not update after initial setup

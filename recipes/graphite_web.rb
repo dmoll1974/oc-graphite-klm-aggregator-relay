@@ -6,6 +6,10 @@
 
 package 'graphite-web'
 
+python_pip "python-memcached" do  
+  action :install
+end
+
 template '/etc/graphite/local_settings.py' do
   source 'local_settings.py.erb'
   mode 0644
@@ -20,6 +24,7 @@ cookbook_file '/usr/lib/python2.7/dist-packages/django/contrib/auth/management/c
   group 'root'
 end
 
+# Patches to fix events
 cookbook_file '/usr/lib/python2.7/dist-packages/graphite/events/views.py' do
   source 'views.py'
   mode 0644
@@ -33,6 +38,30 @@ cookbook_file '/usr/lib/python2.7/dist-packages/graphite/render/views.py' do
   owner 'root'
   group 'root'
 end
+
+# Patches to fix memcached 
+cookbook_file '/usr/lib/python2.7/dist-packages/graphite/app_settings.py' do
+  source 'app_settings.py'
+  mode 0644
+  owner 'root'
+  group 'root'
+end
+
+cookbook_file '/usr/lib/python2.7/dist-packages/graphite/settings.py' do
+  source 'settings.py'
+  mode 0644
+  owner 'root'
+  group 'root'
+end
+
+# Patch to fix pickle https://github.com/graphite-project/graphite-web/commit/4250243f947cf883d47681bb2d06edc1568908dc
+cookbook_file '/usr/lib/python2.7/dist-packages/graphite/util.py' do
+  source 'utils.py'
+  mode 0644
+  owner 'root'
+  group 'root'
+end
+
 
 
 directory '/var/lib/graphite' do

@@ -7,9 +7,9 @@
 SECRET_KEY = '<%= node['oc-graphite']['web']['secret_key'] %>'
 TIME_ZONE = '<%= node['oc-graphite']['web']['time_zone'] %>'
 
-LOG_RENDERING_PERFORMANCE = True
-LOG_CACHE_PERFORMANCE = True
-LOG_METRIC_ACCESS = True
+LOG_RENDERING_PERFORMANCE = False
+LOG_CACHE_PERFORMANCE = False
+LOG_METRIC_ACCESS = False
 
 #####################################
 # Filesystem Paths #
@@ -65,6 +65,7 @@ CLUSTER_SERVERS = <%= node['oc-graphite']['web']['cluster_servers'] %>
 #REMOTE_STORE_RETRY_DELAY = 60    # Time before retrying a failed remote webapp
 #REMOTE_FIND_CACHE_DURATION = 300 # Time to cache remote metric find results
 MEMCACHE_HOSTS = <%= node['oc-graphite']['web']['memcached_hosts'] %>
+DEFAULT_CACHE_DURATION = 600 # Cache images and data for 1 minute
 ## Remote rendering settings
 #REMOTE_RENDERING = True
 #RENDERING_HOSTS = []
