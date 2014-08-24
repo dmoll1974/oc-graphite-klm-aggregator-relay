@@ -113,11 +113,8 @@ def renderView(request):
         log.rendering("Retrieval of %s took %.6f" % (target, time() - t))
         data.extend(seriesList)
 
-    # log.cache("endTime: %s" % endTime)
-    # Hack to prevent Graphite from caching Giraffe 'live' dashboard
     if useCache:
-      if "until=now" not in request.META['QUERY_STRING']:
-        cache.set(dataKey, data, cacheTimeout)
+      cache.set(dataKey, data, cacheTimeout)
 
     format = requestOptions.get('format')
     if format == 'csv':
@@ -171,10 +168,11 @@ def renderView(request):
 
       response['Pragma'] = 'no-cache'
       response['Cache-Control'] = 'no-cache'
-      # Hack to prevent Graphite from caching requests fromGiraffe 'live' dashboard, requests with "fixed" values for from and until will be served (fast!) from Request cache. 
+      # Hack to cache json data from "non-live" dashboards (with fixed from and until values) to request Cache for 24 hours
       if useCache:
-        if "until=now" not in request.META['QUERY_STRING']:
-          cache.set(requestKey, response, cacheTimeout)
+        if "format=json" in request.META['QUERY_STRING'] and "until=now" not in request.META['QUERY_STRING']:
+          cache.set(requestKey, response, 86400)
+
       
       return response
 
