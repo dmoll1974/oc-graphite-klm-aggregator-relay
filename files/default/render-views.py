@@ -171,7 +171,7 @@ def renderView(request):
       # Hack to cache json data from "non-live" dashboards (with fixed from and until values) to request Cache for 24 hours
       if useCache:
         if "format=json" in request.META['QUERY_STRING'] and "until=now" not in request.META['QUERY_STRING']:
-          cache.set(requestKey, response, 86400)
+          cache.set(requestKey, response, 2592000) # TTL = 30 days
 
       
       return response
