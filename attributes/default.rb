@@ -12,7 +12,7 @@ default['oc-graphite']['carbon']['user'] = '_graphite'
 
 default['oc-graphite']['web']['secret_key'] = '0aed5c39507562f4519c2d47515e8221'
 default['oc-graphite']['web']['time_zone'] = 'UTC'
-default['oc-graphite']['web']['server'] = 'uwsgi'
+default['oc-graphite']['web']['server'] = 'nginx'
 
 # Carbon-relay
 

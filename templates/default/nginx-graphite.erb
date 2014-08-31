@@ -9,10 +9,27 @@ upstream graphite {
 }
 
 server {
-	listen 80;
+	listen 8080;
 	server_name <%= node['oc-graphite']['nginx']['hostname'] || node.fqdn %>;
 	charset utf-8;
 	client_max_body_size 15M;
+
+	location / {
+		proxy_pass	http://graphite;
+	}
+}
+
+server {
+	server_name <%= node['oc-graphite']['nginx']['hostname'] || node.fqdn %>;
+	listen 4443 spdy ssl;
+    ssl_certificate /etc/nginx/ssl/nginx.crt;
+    ssl_certificate_key /etc/nginx/ssl/nginx.key;
+    ssl on;
+
+    ssl_session_cache shared:SSL:10m;
+    ssl_session_timeout 10m;
+
+    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
 
 	location / {
 		proxy_pass	http://graphite;
